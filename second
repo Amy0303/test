@@ -1,0 +1,136 @@
+mysql> use hello_mysql;
+Database changed
+
+mysql> create table pay1(
+    -> id int auto_increment primary key,
+    -> money int);
+Query OK, 0 rows affected (0.67 sec)
+
+mysql> insert into pay1(money)
+    -> values(1000),(2800),(2000),(3000),(3500),(5000),(4100),(5600),(9000),(8500),(4700);
+Query OK, 11 rows affected (0.16 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+mysql> select * from pay1;
++----+-------+
+| id | money |
++----+-------+
+|  1 |  1000 |
+|  2 |  2800 |
+|  3 |  2000 |
+|  4 |  3000 |
+|  5 |  3500 |
+|  6 |  5000 |
+|  7 |  4100 |
+|  8 |  5600 |
+|  9 |  9000 |
+| 10 |  8500 |
+| 11 |  4700 |
++----+-------+
+11 rows in set (0.00 sec)
+
+mysql> create table pay2( id int auto_increment primary key, money int);
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> insert into pay2(money) values(3300),(2800),(900),(3000),(3500),(5000),(4100),(5600),(9000),(8500),(4700);
+Query OK, 11 rows affected (0.04 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+mysql> select * from pay2;
++----+-------+
+| id | money |
++----+-------+
+|  1 |  3300 |
+|  2 |  2800 |
+|  3 |   900 |
+|  4 |  3000 |
+|  5 |  3500 |
+|  6 |  5000 |
+|  7 |  4100 |
+|  8 |  5600 |
+|  9 |  9000 |
+| 10 |  8500 |
+| 11 |  4700 |
++----+-------+
+11 rows in set (0.00 sec)
+
+mysql> select sum(money) from pay1;
++------------+
+| sum(money) |
++------------+
+|      49200 |
++------------+
+1 row in set (0.03 sec)
+
+mysql> select max(money) from pay1;
++------------+
+| max(money) |
++------------+
+|       9000 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select min(money) from pay1;
++------------+
+| min(money) |
++------------+
+|       1000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(money),max(money),min(money) from pay1;
++------------+------------+------------+
+| sum(money) | max(money) | min(money) |
++------------+------------+------------+
+|      49200 |       9000 |       1000 |
++------------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(money),max(money),min(money) from pay2;
++------------+------------+------------+
+| sum(money) | max(money) | min(money) |
++------------+------------+------------+
+|      50400 |       9000 |        900 |
++------------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select 9000>9000;
++-----------+
+| 9000>9000 |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.14 sec)
+
+mysql> select 1000>900;
++----------+
+| 1000>900 |
++----------+
+|        1 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select * from pay1 order by id desc limit 0,5;
++----+-------+
+| id | money |
++----+-------+
+| 11 |  4700 |
+| 10 |  8500 |
+|  9 |  9000 |
+|  8 |  5600 |
+|  7 |  4100 |
++----+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from pay1 order by id desc limit 5,5;
++----+-------+
+| id | money |
++----+-------+
+|  6 |  5000 |
+|  5 |  3500 |
+|  4 |  3000 |
+|  3 |  2000 |
+|  2 |  2800 |
++----+-------+
+5 rows in set (0.00 sec)
+
