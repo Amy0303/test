@@ -1,0 +1,39 @@
+mysql> use shopping_mysql;
+
+mysql> create table scbd( id int auto_increment primary key, collect varchar(30));
+
+mysql> insert into scbd(id,collect) values(1,"collect1");
+Query OK, 1 row affected (1.68 sec)
+
+mysql> insert into scbd(id,collect) values(2,"collect2"), (3,"collect3"), (4,"collect4"), (5,"collect5");
+Query OK, 4 rows affected (0.09 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from scbd;
++----+----------+
+| id | collect  |
++----+----------+
+|  1 | collect1 |
+|  2 | collect2 |
+|  3 | collect3 |
+|  4 | collect4 |
+|  5 | collect5 |
++----+----------+
+5 rows in set (0.01 sec)
+
+mysql> delete from scbd where collect="collect1";
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from scbd;
++----+----------+
+| id | collect  |
++----+----------+
+|  2 | collect2 |
+|  3 | collect3 |
+|  4 | collect4 |
+|  5 | collect5 |
++----+----------+
+4 rows in set (0.00 sec)
+
+
+
