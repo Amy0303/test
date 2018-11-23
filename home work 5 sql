@@ -1,0 +1,100 @@
+use shopping_mysql;
+
+mysql> create table film( 
+id int auto_increment primary key,
+film_name varchar(30),
+year int,
+diector varchar(30) not null,
+grade float not null);
+
+mysql> insert into film(id,film_name,year,diector,grade)
+    -> values(1,"aaa",1987,"haha",8.6);
+
+mysql> select * from film;
++----+-----------+------+---------+-------+
+| id | film_name | year | diector | grade |
++----+-----------+------+---------+-------+
+|  1 | aaa       | 1987 | haha    |   8.6 |
++----+-----------+------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into film(film_name,year,diector,grade) 
+    -> values("bbb",2013,"zym",8.9),
+    -> ("bbb",2013,"zym",8.9),
+    -> ("ccc",2015,"zym",8.7),
+    -> ("ddd",2016,"ckg",6.3),
+    -> ("eee",2006,"fxx",6.8),
+    -> ("fff",2086,"sf",7.8),
+    -> ("zzz",2009,"sfc",7.9);
+Query OK, 7 rows affected (0.12 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from film;                                                     +----+-----------+------+---------+-------+
+| id | film_name | year | diector | grade |
++----+-----------+------+---------+-------+
+|  1 | aaa       | 1987 | haha    |   8.6 |
+|  2 | bbb       | 2013 | zym     |   8.9 |
+|  3 | bbb       | 2013 | zym     |   8.9 |
+|  4 | ccc       | 2015 | zym     |   8.7 |
+|  5 | ddd       | 2016 | ckg     |   6.3 |
+|  6 | eee       | 2006 | fxx     |   6.8 |
+|  7 | fff       | 2086 | sf      |   7.8 |
+|  8 | zzz       | 2009 | sfc     |   7.9 |
++----+-----------+------+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> update film set year=2008 where year=2086;
+
+mysql> select * from film;
++----+-----------+------+---------+-------+
+| id | film_name | year | diector | grade |
++----+-----------+------+---------+-------+
+|  1 | aaa       | 1987 | haha    |   8.6 |
+|  2 | bbb       | 2013 | zym     |   8.9 |
+|  3 | bbb       | 2013 | zym     |   8.9 |
+|  4 | ccc       | 2015 | zym     |   8.7 |
+|  5 | ddd       | 2016 | ckg     |   6.3 |
+|  6 | eee       | 2006 | fxx     |   6.8 |
+|  7 | fff       | 2008 | sf      |   7.8 |
+|  8 | zzz       | 2009 | sfc     |   7.9 |
++----+-----------+------+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from film where film_name like "%b%";
++----+-----------+------+---------+-------+
+| id | film_name | year | diector | grade |
++----+-----------+------+---------+-------+
+|  2 | bbb       | 2013 | zym     |   8.9 |
+|  3 | bbb       | 2013 | zym     |   8.9 |
++----+-----------+------+---------+-------+
+2 rows in set (0.04 sec)
+
+mysql> select * from film where diector like "s%";
++----+-----------+------+---------+-------+
+| id | film_name | year | diector | grade |
++----+-----------+------+---------+-------+
+|  7 | fff       | 2008 | sf      |   7.8 |
+|  8 | zzz       | 2009 | sfc     |   7.9 |
++----+-----------+------+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from film where year=2013;
++----+-----------+------+---------+-------+
+| id | film_name | year | diector | grade |
++----+-----------+------+---------+-------+
+|  2 | bbb       | 2013 | zym     |   8.9 |
+|  3 | bbb       | 2013 | zym     |   8.9 |
++----+-----------+------+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from film where grade in( select max(grade) from film);
++----+-----------+------+---------+-------+
+| id | film_name | year | diector | grade |
++----+-----------+------+---------+-------+
+|  2 | bbb       | 2013 | zym     |   8.9 |
+|  3 | bbb       | 2013 | zym     |   8.9 |
++----+-----------+------+---------+-------+
+2 rows in set (0.10 sec)
+
+
+
